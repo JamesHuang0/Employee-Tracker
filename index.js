@@ -24,8 +24,8 @@ function homeScreen() {
         choices: ["View all departments", "View all roles", "View all employees", "Add a department", "Add a role", "Add an employee", "Update an employee role"]
     })
 
-    .then(function(choice) {
-        switch (choice.option) {
+    .then(function(result) {
+        switch (result.option) {
             case "View all departments":
                 viewDep();
                 break;
