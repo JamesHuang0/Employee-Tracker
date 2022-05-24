@@ -21,11 +21,11 @@ function homeScreen() {
         type: 'list',
         name: 'startScreen',
         message: 'What would you like to do?',
-        choices: ["View all departments", "View all roles", "View all employees", "Add a department", "Add a role", "Add an employee", "Update an employee role"]
+        choices: ["View all departments", "View all roles", "View all employees", "Add a department", "Add a role", "Add an employee", "Update an employee role", "Exit"]
     })
 
     .then(function(result) {
-        switch (result.option) {
+        switch (result.startScreen) {
             case "View all departments":
                 viewDep();
                 break;
@@ -46,6 +46,9 @@ function homeScreen() {
                 break;
             case "Update an employee role":
                 updateEmp();
+                break;
+            case "Exit":
+                connection.end();
                 break;
         }
     });
@@ -87,7 +90,7 @@ function addDep() {
         message: "What is the name of the department?",
     }).then(function(answer) {
 
-        connection.query("INSERT INTO department (name) VALUES (?)", [answer.depName], function(err, res) {
+        connection.query("INSERT INTO department (department_name) VALUES (?)", [answer.depName], function(err, res) {
             if (err) throw err;
             console.table(res)
             homeScreen();
